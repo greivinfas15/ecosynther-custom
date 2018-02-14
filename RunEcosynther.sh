@@ -18,7 +18,7 @@
 BASE_PATH=$(dirname $(which $0));
 IMAGE_BASE_PATH=$PWD;
 
-SIFTGPU_PATH="/home/grfallas/Code/ecosynther_v0.8/ecosynther_v0.8/Ecosynther_v0.8_GPS_filter/EcosyntherFull/CustomizeGPUSIFT";
+SIFTGPU_PATH="/home/greivin/Code/ecosynther_v0.8/ecosynther_v0.8/Ecosynther_v0.8_GPS_filter/EcosyntherFull/CustomizeGPUSIFT";
 
 timestamp=`date`
 echo "$timestamp Starting RunEcosynther" >> timelog
@@ -81,15 +81,20 @@ echo "[- Execute GPU SIFT and matching -]"
 
 EXTENSION=".gz"
 
-for d in `ls -1 $IMAGE_DIR | egrep "jpg$"`
+
+##
+rename 's/.jpg$/.key/' *.jpg
+##
+
+for d in `ls -1 $IMAGE_DIR | egrep "key$"` #for d in `ls -1 $IMAGE_DIR | egrep "jpg$"`
 do
-	key_file=`echo $d | sed 's/jpg$/key/'`
+	key_file=`echo $d` #key_file=`echo $d | sed 's/jpg$/key/'`
 	echo "gzip -f $key_file"
 	gzip -f $key_file
 	mv $key_file$EXTENSION $IMAGE_BASE_PATH
 done	
 
-rm *.jpg
+#rm *.jpg    
 rm list_tmp.txt
 
 mv matches.init.txt $IMAGE_BASE_PATH
@@ -134,3 +139,5 @@ echo "$timestamp Done: Bundle Adjustment" >> timelog
 
 timestamp=`date`
 echo "$timestamp [- Done -]" >> timelog
+
+
