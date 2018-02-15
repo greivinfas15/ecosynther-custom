@@ -17,10 +17,16 @@ make
 
 
 
+-----------------------------------------------------------------
+pruebas con osm-bundler (python)
+sudo apt-get install zlib1g
+sudo apt-get install libjpeg62:i386
+sudo apt-get install libgfortran3:i386 
+
+-----------------------------------------------------------------
+para ejecutar RunSFM (tiene otros binarios que los originales)
+/<RunSFM_dir>/RunSFM.sh desde el directorio de las imagenes 
 
 
 
---------------------------
-pppgui
-visualgui
 
